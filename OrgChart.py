@@ -187,10 +187,10 @@ async def AsyncWrapper(rootSMTP: str, reqJson: dict, **kwargs) -> dict:
 
         # If anything looks dodgy, just say the email address is unrecognised
         if respJson is None:
-            Exception("Unrecognised email address")
+            raise Exception("Unrecognised email address")
         rootID = respJson["person"].get("aadObjectId")
         if rootID is None:
-            Exception("Unrecognised email address")
+            raise Exception("Unrecognised email address")
 
         # Begin recursion
         return await GetOrg(rootID, reqJson, session)
